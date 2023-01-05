@@ -1,0 +1,21 @@
+//This will be used when opening a thumbnail of cocktail - then we will need to use ID from
+thumbnail to this call - instead of "11007" we will use the right id for chosen cocktail and from
+this function we will get all the information for recipe screen
+
+
+private lateinit var viewModel: MainViewModel
+
+
+val repository = Repository()
+        val viewModelFactory = MainViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
+        viewModel.getFullInfoById(11007)
+        viewModel.fullResponse.observe(this, Observer{response ->
+            if(response.isSuccessful){
+                Log.d("RESPONSE", response.body()!!.fullRes[0].idDrink)
+
+
+            }else{
+                Log.d("ERROR", response.code().toString())
+            }
+        })
