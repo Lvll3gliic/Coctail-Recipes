@@ -25,5 +25,10 @@ interface SimpleApi {
          @Query("s") name: String
      ): Response<FullData>
 
+     @GET("api/json/v1/1/filter.php?")
+     suspend fun getCocktailsByCategory(
+         @Query("c") category: String
+     ): Response<FullData>
+
 }
 

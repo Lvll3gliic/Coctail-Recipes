@@ -37,7 +37,11 @@ class MainViewModel(private val repository: Repository): ViewModel() {
             val response: Response<FullData> = repository.getCocktailsByName(name)
             fullResponse.value = response
         }
-
-
+    }
+    fun getCocktailsByCategory(category: String){
+        viewModelScope.launch {
+            val response : Response<FullData> = repository.getCocktailsByCategory(category)
+            fullResponse.value = response
+        }
     }
 }

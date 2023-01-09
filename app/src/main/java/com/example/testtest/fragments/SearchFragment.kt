@@ -18,7 +18,7 @@ import com.example.testtest.databinding.FragmentSearchBinding
 import com.example.testtest.repository.Repository
 import com.example.testtest.adapter.MyAdapter.OnItemClickListener as OnItemClickListener1
 
-private lateinit var binding: FragmentSearchBinding
+lateinit var binding: FragmentSearchBinding
 private lateinit var viewModel: MainViewModel
 lateinit var myAdapter: MyAdapter
 lateinit var linearLayoutManager: LinearLayoutManager
@@ -131,6 +131,9 @@ class SearchFragment : Fragment() {
                         transaction?.commit()
                     }
                 })
+            }else{
+                //here needs to be some text that didn't find any cocktails
+
             }
         })
 
