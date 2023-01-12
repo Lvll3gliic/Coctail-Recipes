@@ -39,6 +39,7 @@ class DrinksByCategoryFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
 
+
     }
 
     override fun onCreateView(
@@ -54,7 +55,8 @@ class DrinksByCategoryFragment : Fragment() {
         val drinksRecycler = bindingDrinksCategory.drinksRecycler
         linearLayoutManager = LinearLayoutManager(activity)
         drinksRecycler.layoutManager = linearLayoutManager
-        getCocktailsByCategory("Homemade Liqueur",drinksRecycler )
+        val category = arguments?.getString("category")
+        getCocktailsByCategory(category.toString(),drinksRecycler )
     }
     companion object {
         @JvmStatic
