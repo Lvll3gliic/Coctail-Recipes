@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.testtest.model.Data
 import com.example.testtest.model.FullData
+
 import com.example.testtest.repository.Repository
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -13,6 +14,7 @@ class MainViewModel(private val repository: Repository): ViewModel() {
 
     val myResponse: MutableLiveData<Response<Data>> = MutableLiveData()
     val fullResponse: MutableLiveData<Response<FullData>> = MutableLiveData()
+
     fun getPost(){
         viewModelScope.launch{
             val response: Response<Data> = repository.getPost()
@@ -43,5 +45,7 @@ class MainViewModel(private val repository: Repository): ViewModel() {
             val response : Response<FullData> = repository.getCocktailsByCategory(category)
             fullResponse.value = response
         }
+    
     }
+
 }

@@ -1,27 +1,23 @@
 package com.example.testtest.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import com.example.testtest.MainActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.testtest.MainViewModel
 import com.example.testtest.MainViewModelFactory
-import com.example.testtest.R
 import com.example.testtest.databinding.FragmentFavoritesBinding
-import com.example.testtest.databinding.FragmentSearchBinding
+
 import com.example.testtest.repository.Repository
-import kotlinx.coroutines.launch
 
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 lateinit var binding_fav: FragmentFavoritesBinding
+private lateinit var viewModel: MainViewModel
 class FavoritesFragment : Fragment() {
 
     private var param1: String? = null
@@ -35,10 +31,7 @@ class FavoritesFragment : Fragment() {
         }
 
 
-
     }
-
-
 
 
     override fun onCreateView(
@@ -50,11 +43,16 @@ class FavoritesFragment : Fragment() {
         return binding_fav.root
 
 
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+
+
+
+
+
+
+
     }
 
     companion object {

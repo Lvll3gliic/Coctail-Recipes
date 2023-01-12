@@ -130,7 +130,3 @@ class CategoryFragment : Fragment() {
     }
 
 }
-
-
-
-
