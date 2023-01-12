@@ -2,21 +2,28 @@ package com.example.testtest.fragments
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.testtest.MainViewModel
 import com.example.testtest.MainViewModelFactory
 import com.example.testtest.R
+import com.example.testtest.adapter.MyAdapter
+import com.example.testtest.adapter.MyAdapterCategory
+import com.example.testtest.databinding.FragmentCategoryBinding
 import com.example.testtest.repository.Repository
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+
 
 /**
  * A simple [Fragment] subclass.
@@ -28,6 +35,11 @@ class CategoryFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var viewModel: MainViewModel
+    lateinit var bindingCategory: FragmentCategoryBinding
+    lateinit var myAdapter: MyAdapterCategory
+    lateinit var linearLayoutManagerCategory: LinearLayoutManager
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -36,44 +48,82 @@ class CategoryFragment : Fragment() {
         }
 
 
+
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        linearLayoutManagerCategory = LinearLayoutManager(activity)
+        val categoryView = bindingCategory.categoryRecycler
+        categoryView.layoutManager = linearLayoutManagerCategory
+        getCategories(categoryView)
+
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        bindingCategory = FragmentCategoryBinding.inflate(layoutInflater)
+
+        return bindingCategory.root
+    }
+
+
+    fun getCategories(view: RecyclerView){
         //This is for API call to get all the categories that are used in this API
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
         viewModel.getPost()
-        viewModel.myResponse.observe(this, Observer{response ->
-            if(response.isSuccessful){
-                //this is the way how to get all categories, most probably this for loop will be needed
-                //to make list with available categories on the screen
-                for(c in response.body()!!.res){
-                    //at the moment all categories that we get from API are just Loged as Debug in Logcat
-                    Log.d("RESPONSE", c.category)
-                }
+        viewModel.myResponse.observe(viewLifecycleOwner, Observer{response ->
+            Log.d("responsee", response.body()!!.res.get(0).category)
+            if(response.body()!!.res != null){
+                myAdapter = MyAdapterCategory(activity, response)
 
-
-            }else{
-                //if something goes wrong then this Logs out as Debug in Logcat message why it went wrong
-                //at the moment it works xD
-                Log.d("ERROR", response.code().toString())
+                myAdapter.notifyDataSetChanged()
+                view.adapter = myAdapter
+                myAdapter.setOnItemClickListener(object:MyAdapterCategory.OnItemClickListener{
+                    override fun onItemClick(position: Int) {
+                        //to use fragments in transaction we need to make val, value is
+                        //fragment name with ()
+                        val drinksByCategory = DrinksByCategoryFragment()
+                        //needs to make a bundle to send data from one fragment to another
+                        val bundle = Bundle()
+                        //put string in ("variable name", value)
+                        bundle.putString("category",response.body()!!.res.get(position).category)
+                        //then transaction from this fragment to recipe fragment
+                        val transaction = fragmentManager?.beginTransaction()
+                        //add bundle as argument
+                        drinksByCategory.arguments = bundle
+                        // to open new fragment we need to replace frame layout from
+                        //main activity to this fragment (it always happens when changing fragments)
+                        //this should work from any fragment
+                        transaction?.replace(R.id.frame_layout, drinksByCategory)
+                        transaction?.commit()
+                    }
+                })
             }
+//            if(response.isSuccessful){
+//                //this is the way how to get all categories, most probably this for loop will be needed
+//                //to make list with available categories on the screen
+//                for(c in response.body()!!.res){
+//                    //at the moment all categories that we get from API are just Loged as Debug in Logcat
+//                    Log.d("RESPONSE", c.category)
+//
+//
+//                }
+//
+
+//            }else{
+//                //if something goes wrong then this Logs out as Debug in Logcat message why it went wrong
+//                //at the moment it works xD
+//                Log.d("ERROR", response.code().toString())
+//            }
         })
-
-
-
-
-
-
-
-    }
     }
 
-    fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_category, container, false)
-    }
 
     internal object test{
         /**
@@ -94,4 +144,9 @@ class CategoryFragment : Fragment() {
                 }
             }
     }
+
+}
+
+
+
 
