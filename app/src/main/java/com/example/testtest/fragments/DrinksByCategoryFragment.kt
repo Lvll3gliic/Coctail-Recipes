@@ -87,20 +87,20 @@ class DrinksByCategoryFragment : Fragment() {
 
                         //to use fragments in transaction we need to make val, value is
                         //fragment name with ()
-                        //val recipefragment = RecipeFragment()
+                        val recipefragment = RecipeFragment()
                         //needs to make a bundle to send data from one fragment to another
-                        //val bundle = Bundle()
+                        val bundle = Bundle()
                         //put string in ("variable name", value)
-                       // bundle.putString("drinkId", response.body()!!.fullRes[position].idDrink)
+                       bundle.putString("drinkId", response.body()!!.fullRes[position].idDrink)
                         //then transaction from this fragment to recipe fragment
-                      //  val transaction = fragmentManager?.beginTransaction()
+                        val transaction = fragmentManager?.beginTransaction()
                         //add bundle as argument
-                       // recipefragment.arguments = bundle
+                       recipefragment.arguments = bundle
                         // to open new fragment we need to replace frame layout from
                         //main activity to this fragment (it always happens when changing fragments)
                         //this should work from any fragment
-                       // transaction?.replace(R.id.frame_layout, recipefragment)
-                       // transaction?.commit()
+                        transaction?.replace(R.id.frame_layout, recipefragment)
+                        transaction?.commit()
                     }
 
 
