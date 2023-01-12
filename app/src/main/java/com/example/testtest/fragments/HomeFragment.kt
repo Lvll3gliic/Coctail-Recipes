@@ -2,10 +2,11 @@ package com.example.testtest.fragments
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -13,7 +14,6 @@ import com.example.testtest.MainViewModel
 import com.example.testtest.MainViewModelFactory
 import com.example.testtest.R
 import com.example.testtest.databinding.FragmentHomeBinding
-import com.example.testtest.databinding.FragmentRecipeBinding
 import com.example.testtest.repository.Repository
 
 // TODO: Rename parameter arguments, choose names that match
@@ -89,6 +89,31 @@ class HomeFragment : Fragment() {
                 bindings1.randingr2.text = response.body()!!.fullRes[0].strIngredient2
                 bindings1.randingr3.text = response.body()!!.fullRes[0].strIngredient3
                 Glide.with(this).load(response.body()!!.fullRes[0].strDrinkThumb).into(bindings1.randpic)
+
+
+                bindings1.randyes.setOnClickListener(View.OnClickListener {
+                    //to use fragments in transaction we need to make val, value is
+                    //fragment name with ()
+                    val recipefragment = RecipeFragment()
+                    //needs to make a bundle to send data from one fragment to another
+                    val bundle = Bundle()
+                    //put string in ("variable name", value)
+                    bundle.putString("drinkId",response.body()!!.fullRes[0].idDrink)
+                    //then transaction from this fragment to recipe fragment
+                    val transaction = fragmentManager?.beginTransaction()
+                    //add bundle as argument
+                    recipefragment.arguments = bundle
+                    // to open new fragment we need to replace frame layout from
+                    //main activity to this fragment (it always happens when changing fragments)
+                    //this should work from any fragment
+                    transaction?.replace(R.id.frame_layout, recipefragment)
+                    transaction?.commit()
+                })
+
+                bindings1.randno.setOnClickListener(View.OnClickListener {
+                    viewModel.getRandomDrink()
+                })
+
             }else{
                 Log.d("ERROR", response.code().toString())
             }
