@@ -1,14 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="HOME/RANDOM" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/Home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Feeling lucky!"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.046" />
+
+        <TextView
+            android:id="@+id/randname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Home"
+            app:layout_constraintVertical_bias="0.092" />
+
+        <TextView
+            android:id="@+id/randmaining"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MAIN INGREDIENTS:"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.129"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/randname"
+            app:layout_constraintVertical_bias="0.444" />
+
+        <TextView
+            android:id="@+id/randingr1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.104"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/randmaining"
+            app:layout_constraintVertical_bias="0.069" />
+
+        <TextView
+            android:id="@+id/randingr2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.104"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/randingr1"
+            app:layout_constraintVertical_bias="0.026" />
+
+        <TextView
+            android:id="@+id/randingr3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.101"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/randingr2"
+            app:layout_constraintVertical_bias="0.033" />
+
+        <ImageView
+            android:id="@+id/randpic"
+            android:layout_width="217dp"
+            android:layout_height="210dp"
+            app:layout_constraintBottom_toTopOf="@+id/randmaining"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/randname"
+            tools:src="@tools:sample/avatars" />
+
+        <Button
+            android:id="@+id/randyes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Try it out!"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/randingr3"
+            app:layout_constraintVertical_bias="0.254" />
+
+        <Button
+            android:id="@+id/randno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Try again!"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/randyes" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
