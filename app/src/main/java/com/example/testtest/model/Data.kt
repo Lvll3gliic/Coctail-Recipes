@@ -64,3 +64,4 @@ data class CocktailFullInfo(
     val strTags: String,
     val strVideo: String
 )
+
