@@ -170,7 +170,8 @@ class RecipeFragment : Fragment() {
                 bindings.scrollContainer.addView(textView);
             }
 
- 
+            Glide.with(this).load(response.body()!!.fullRes[0].strDrinkThumb).into(bindings.recipePic);
+
             bindings.inststr.text = response.body()!!.fullRes[0].strInstructions;
             //here should be placed code for displaying all the information
 
