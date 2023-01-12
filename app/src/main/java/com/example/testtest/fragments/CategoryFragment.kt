@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.testtest.MainViewModel
 import com.example.testtest.MainViewModelFactory
 import com.example.testtest.R
+import com.example.testtest.databinding.FragmentCategoryBinding
+import com.example.testtest.databinding.FragmentSearchBinding
 import com.example.testtest.repository.Repository
 
 // TODO: Rename parameter arguments, choose names that match
@@ -28,6 +30,9 @@ class CategoryFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var viewModel: MainViewModel
+    lateinit var bindingCategory: FragmentCategoryBinding
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -67,12 +72,12 @@ class CategoryFragment : Fragment() {
     }
     }
 
-    fun onCreateView(
+    override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_category, container, false)
+        bindingCategory =
     }
 
     internal object test{
