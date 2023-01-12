@@ -8,9 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.example.testtest.MainViewModel
 import com.example.testtest.MainViewModelFactory
 import com.example.testtest.R
+import com.example.testtest.databinding.FragmentHomeBinding
+import com.example.testtest.databinding.FragmentRecipeBinding
 import com.example.testtest.repository.Repository
 
 // TODO: Rename parameter arguments, choose names that match
@@ -18,6 +21,8 @@ import com.example.testtest.repository.Repository
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 private lateinit var viewModel: MainViewModel
+lateinit var bindings1: FragmentHomeBinding
+
 /**
  * A simple [Fragment] subclass.
  * Use the [HomeFragment.newInstance] factory method to
@@ -44,7 +49,9 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+        bindings1 = FragmentHomeBinding.inflate(layoutInflater)
+        return bindings1.root
+
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
@@ -77,8 +84,11 @@ class HomeFragment : Fragment() {
                 //I chose to use fullRes[0] - array first element because it only gives one recipe
                 //so this works this time without any problems
                 Log.d("RESPONSE", response.body()!!.fullRes[0].strDrink)
-
-
+                bindings1.randname.text = response.body()!!.fullRes[0].strDrink
+                bindings1.randingr1.text = response.body()!!.fullRes[0].strIngredient1
+                bindings1.randingr2.text = response.body()!!.fullRes[0].strIngredient2
+                bindings1.randingr3.text = response.body()!!.fullRes[0].strIngredient3
+                Glide.with(this).load(response.body()!!.fullRes[0].strDrinkThumb).into(bindings1.randpic)
             }else{
                 Log.d("ERROR", response.code().toString())
             }

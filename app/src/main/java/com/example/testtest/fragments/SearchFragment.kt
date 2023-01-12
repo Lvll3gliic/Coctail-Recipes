@@ -3,20 +3,22 @@ package com.example.testtest.fragments
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.testtest.*
+import com.example.testtest.MainViewModel
+import com.example.testtest.MainViewModelFactory
+import com.example.testtest.R
 import com.example.testtest.adapter.MyAdapter
 import com.example.testtest.databinding.FragmentSearchBinding
 import com.example.testtest.repository.Repository
-import com.example.testtest.adapter.MyAdapter.OnItemClickListener as OnItemClickListener1
 
 lateinit var binding: FragmentSearchBinding
 private lateinit var viewModel: MainViewModel
@@ -27,7 +29,9 @@ lateinit var linearLayoutManager: LinearLayoutManager
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-
+//
+private val TAG: String? = "MyActivity"
+//
 
 
 class SearchFragment : Fragment() {
@@ -40,22 +44,15 @@ class SearchFragment : Fragment() {
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
-
         }
-
-
-
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         binding = FragmentSearchBinding.inflate(layoutInflater)
         return binding.root
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -76,7 +73,6 @@ class SearchFragment : Fragment() {
                 if(p0 != null){
                     userInput = p0.toString()
                     getCoctailsByName(userInput, searchRecycler)
-
                 }
             return true
             }
@@ -87,8 +83,6 @@ class SearchFragment : Fragment() {
                 handler.postDelayed(searchRunnable, 300L)
                 return true
             }
-
-
         })}
 
     companion object {
@@ -101,6 +95,7 @@ class SearchFragment : Fragment() {
                 }
             }
     }
+
     fun getCoctailsByName(name: String, view : RecyclerView){
         val repository = Repository()
         val viewModelFactory = MainViewModelFactory(repository)
@@ -129,6 +124,7 @@ class SearchFragment : Fragment() {
                         //this should work from any fragment
                         transaction?.replace(R.id.frame_layout, recipefragment)
                         transaction?.commit()
+
                     }
                 })
             }else{

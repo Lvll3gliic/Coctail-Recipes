@@ -46,6 +46,7 @@ class MyAdapter(val context: FragmentActivity?, val names: FullData?): RecyclerV
 
         holder.cocktailName.text = names!!.fullRes[position].strDrink
         context?.let { Glide.with(it).load(names.fullRes[position].strDrinkThumb).into(holder.imgUrl) }
+
     }
 
     override fun getItemCount(): Int {
