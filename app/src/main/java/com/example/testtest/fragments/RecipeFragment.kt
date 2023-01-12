@@ -2,24 +2,19 @@ package com.example.testtest.fragments
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
-import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.testtest.MainViewModel
 import com.example.testtest.MainViewModelFactory
 import com.example.testtest.R
-import com.example.testtest.adapter.MyAdapter
 import com.example.testtest.databinding.FragmentRecipeBinding
-import com.example.testtest.databinding.FragmentSearchBinding
 import com.example.testtest.repository.Repository
 
 private const val ARG_PARAM1 = "param1"
@@ -48,9 +43,10 @@ class RecipeFragment : Fragment() {
         })
         //ends here, just change the val searchFragment value to which u need
 
-        //this just takes argument from previous fragment - this time drink ID so that we can search drink by ID
+        //this just takpes argument from revious fragment - this time drink ID so that we can search drink by ID
         val drinkId = arguments?.getString("drinkId")
         getDrinkInfoById(drinkId!!.toInt())
+        Log.d("WWWW", drinkId);
     }
 
     override fun onCreateView(
@@ -58,9 +54,24 @@ class RecipeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         bindings = FragmentRecipeBinding.inflate(layoutInflater)
+
+
+        // This is where I edit my layouts to match the design
+
+        val drinkId = arguments?.getString("drinkId")
+        //bindings.textView.text = drinkId;
+
+
+
+
+
+
+
+
+
+        // ends here
+
         return bindings.root
-
-
         return inflater.inflate(R.layout.fragment_recipe, container, false)
     }
 
@@ -82,8 +93,88 @@ class RecipeFragment : Fragment() {
         viewModel.getFullInfoById(id)
         viewModel.fullResponse.observe(requireActivity(), Observer{ response ->
 
-           //here should be placed code for displaying all the information
+            Log.d("RESPONSE", response.body()!!.fullRes[0].idDrink);
+
+            bindings.name.text = response.body()!!.fullRes[0].strDrink;
+
+            bindings.ing1.text = response.body()!!.fullRes[0].strIngredient1;
+
+            if(response.body()!!.fullRes[0].strIngredient2 != null){
+                val textView = TextView(activity)
+                textView.setText(response.body()!!.fullRes[0].strIngredient2)
+                bindings.scrollContainer.addView(textView);
+            }
+            if(response.body()!!.fullRes[0].strIngredient3 != null){
+                val textView = TextView(activity)
+                textView.setText(response.body()!!.fullRes[0].strIngredient3)
+                bindings.scrollContainer.addView(textView);
+            }
+            if(response.body()!!.fullRes[0].strIngredient4 != null){
+                val textView = TextView(activity)
+                textView.setText(response.body()!!.fullRes[0].strIngredient4)
+                bindings.scrollContainer.addView(textView);
+            }
+            if(response.body()!!.fullRes[0].strIngredient5 != null){
+                val textView = TextView(activity)
+                textView.setText(response.body()!!.fullRes[0].strIngredient5)
+                bindings.scrollContainer.addView(textView);
+            }
+            if(response.body()!!.fullRes[0].strIngredient6 != null){
+                val textView = TextView(activity)
+                textView.setText(response.body()!!.fullRes[0].strIngredient6)
+                bindings.scrollContainer.addView(textView);
+            }
+            if(response.body()!!.fullRes[0].strIngredient7 != null){
+                val textView = TextView(activity)
+                textView.setText(response.body()!!.fullRes[0].strIngredient7)
+                bindings.scrollContainer.addView(textView);
+            }
+            if(response.body()!!.fullRes[0].strIngredient8 != null){
+                val textView = TextView(activity)
+                textView.setText(response.body()!!.fullRes[0].strIngredient8)
+                bindings.scrollContainer.addView(textView);
+            }
+            if(response.body()!!.fullRes[0].strIngredient9 != null){
+                val textView = TextView(activity)
+                textView.setText(response.body()!!.fullRes[0].strIngredient9)
+                bindings.scrollContainer.addView(textView);
+            }
+            if(response.body()!!.fullRes[0].strIngredient10 != null){
+                val textView = TextView(activity)
+                textView.setText(response.body()!!.fullRes[0].strIngredient10)
+                bindings.scrollContainer.addView(textView);
+            }
+            if(response.body()!!.fullRes[0].strIngredient11 != null){
+                val textView = TextView(activity)
+                textView.setText(response.body()!!.fullRes[0].strIngredient11)
+                bindings.scrollContainer.addView(textView);
+            }
+            if(response.body()!!.fullRes[0].strIngredient12 != null){
+                val textView = TextView(activity)
+                textView.setText(response.body()!!.fullRes[0].strIngredient12)
+                bindings.scrollContainer.addView(textView);
+            }
+            if(response.body()!!.fullRes[0].strIngredient13 != null){
+                val textView = TextView(activity)
+                textView.setText(response.body()!!.fullRes[0].strIngredient13)
+                bindings.scrollContainer.addView(textView);
+            }
+            if(response.body()!!.fullRes[0].strIngredient14 != null){
+                val textView = TextView(activity)
+                textView.setText(response.body()!!.fullRes[0].strIngredient14)
+                bindings.scrollContainer.addView(textView);
+            }
+            if(response.body()!!.fullRes[0].strIngredient15 != null){
+                val textView = TextView(activity)
+                textView.setText(response.body()!!.fullRes[0].strIngredient15)
+                bindings.scrollContainer.addView(textView);
+            }
+
+ 
+            bindings.inststr.text = response.body()!!.fullRes[0].strInstructions;
+            //here should be placed code for displaying all the information
 
         })
+
     }
 }
