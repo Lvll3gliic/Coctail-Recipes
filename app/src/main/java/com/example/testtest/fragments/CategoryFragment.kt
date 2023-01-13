@@ -105,22 +105,6 @@ class CategoryFragment : Fragment() {
                     }
                 })
             }
-//            if(response.isSuccessful){
-//                //this is the way how to get all categories, most probably this for loop will be needed
-//                //to make list with available categories on the screen
-//                for(c in response.body()!!.res){
-//                    //at the moment all categories that we get from API are just Loged as Debug in Logcat
-//                    Log.d("RESPONSE", c.category)
-//
-//
-//                }
-//
-
-//            }else{
-//                //if something goes wrong then this Logs out as Debug in Logcat message why it went wrong
-//                //at the moment it works xD
-//                Log.d("ERROR", response.code().toString())
-//            }
         })
     }
 
