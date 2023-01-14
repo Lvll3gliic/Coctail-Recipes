@@ -63,5 +63,7 @@ data class CocktailFullInfo(
     val strMeasure9: String,
     val strTags: String,
     val strVideo: String
-)
+) {
+
+}
 

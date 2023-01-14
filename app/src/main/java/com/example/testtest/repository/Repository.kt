@@ -4,7 +4,6 @@ import com.example.testtest.api.RetrofitInstance
 import com.example.testtest.model.Data
 import com.example.testtest.model.FullData
 import retrofit2.Response
-import java.util.Locale.Category
 
 class Repository {
 
